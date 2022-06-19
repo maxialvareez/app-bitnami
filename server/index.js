@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const { mongoose } = require('./database');
 const {createRoles} = require('./libs/initialSetup');
+const cors = require('cors'); 
 
 // Initializations
 const app = express();
@@ -11,8 +12,10 @@ createRoles;
 app.set('port', process.env.PORT || 3001);
 
 // Middlewares
+app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+
 
 // Routes
 app.use('/api/gastos', require('./routes/gastos.routes'));
